@@ -29,13 +29,11 @@ const Izidio = {
     gravidade: .3,
     pulo: 5,
 
-
 atualiza(){
     if(colisão(Izidio, bg)){
-        
         Izidio.y = 50;
         Izidio.velocidade=0;
-        mudaDeTela(telas.INICIO);
+        mudaDeTela(telas.Over);
     }
         Izidio.velocidade = Izidio.velocidade+Izidio.gravidade;
         Izidio.y = Izidio.y + Izidio.velocidade;
@@ -137,6 +135,27 @@ desenha(){  sprites,
 
 //Pontuação
 
+const pont = {
+spriteX: 318,
+spriteY: 248,
+largura: 237,
+altura: 210,
+x: 40,
+y: 70,
+
+desenha(){
+    ctx.drawImage(
+    sprites,
+    pont.spriteX, pont.spriteY,
+    pont.largura, pont.altura, 
+    pont.x ,pont.y,
+    pont.largura, pont.altura,
+    );
+
+}
+}
+
+
 //Telas:
 
 var telaAtived = {};
@@ -178,6 +197,24 @@ atualiza(){
     Izidio.atualiza();
 }
 }
+
+telas.Over = {
+
+    desenha(){
+        back.desenha();
+        bg.desenha();
+        pont.desenha();
+    },
+    click(){
+        mudaDeTela(telas.INICIO);
+    },
+    atualiza(){
+
+    }
+
+}
+
+
 
 function loop(){
 
