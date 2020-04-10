@@ -145,6 +145,8 @@ altura: 210,
 x: 40,
 y: 70,
 
+
+
 desenha(){
     ctx.drawImage(
     sprites,
@@ -157,14 +159,15 @@ desenha(){
 }
 }
 
+
 var CanN = {
     spriteX: 14,
     spriteY: 268,
     largura: 43,
     altura: 230,
     x: canvas.width,
-    y: 0,
-    gap: 85,
+    gap: 60,
+    y: Math.floor(Math.random() * -70),
     desenha(){
         ctx.drawImage(
         sprites,
@@ -173,10 +176,14 @@ var CanN = {
         CanN.x ,CanN.y,
         CanN.largura, CanN.altura,
         );
-    
     },
     atualiza(){
         CanN.x = CanN.x - 1;
+        if(CanN.x == -20){
+            CanN.x = canvas.width;
+        }
+
+    
 
     }
     }
@@ -187,7 +194,7 @@ var CanN = {
         largura: 41,
         altura: 217,
         x: canvas.width,
-        y: CanN.altura + CanN.gap,
+        y: CanN.altura + CanN.gap + CanN.y,
        
         desenha(){
             ctx.drawImage(
@@ -198,17 +205,19 @@ var CanN = {
                 CanS.largura, CanS.altura,
 
             );
+    
             },
         atualiza(){
             CanS.x = CanS.x - 1;
-            
-        }
-        
+            if(CanS.x == -20){
+                CanS.x = canvas.width;
+            }
+    
+        }  
     }
 
     
     
-
 
 
 //Telas:
@@ -239,6 +248,7 @@ const telas = {
 
 telas.Jogo = {
 desenha(){
+
     back.desenha();
     CanN.desenha();
     CanS.desenha();
@@ -252,6 +262,7 @@ click(){
 Izidio.velocidade = -Izidio.pulo;
 },
 atualiza(){
+
     CanN.atualiza();
     CanS.atualiza();
     Izidio.atualiza();
@@ -273,10 +284,6 @@ telas.Over = {
     }
 
 }
-
-var pipe = []
-
-pipe[0]
 
 
 
