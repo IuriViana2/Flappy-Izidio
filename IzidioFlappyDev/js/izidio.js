@@ -33,6 +33,8 @@ atualiza(){
     if(colisão(Izidio, bg)){
         Izidio.y = 50;
         Izidio.velocidade=0;
+        CanN.x = canvas.width;
+        CanS.x = canvas.width;
         mudaDeTela(telas.Over);
     }
         Izidio.velocidade = Izidio.velocidade+Izidio.gravidade;
@@ -155,6 +157,59 @@ desenha(){
 }
 }
 
+var CanN = {
+    spriteX: 14,
+    spriteY: 268,
+    largura: 43,
+    altura: 230,
+    x: canvas.width,
+    y: 0,
+    gap: 85,
+    desenha(){
+        ctx.drawImage(
+        sprites,
+        CanN.spriteX, CanN.spriteY,
+        CanN.largura, CanN.altura, 
+        CanN.x ,CanN.y,
+        CanN.largura, CanN.altura,
+        );
+    
+    },
+    atualiza(){
+        CanN.x = CanN.x - 1;
+
+    }
+    }
+
+    var CanS = {
+        spriteX: 75,
+        spriteY: 224,
+        largura: 41,
+        altura: 217,
+        x: canvas.width,
+        y: CanN.altura + CanN.gap,
+       
+        desenha(){
+            ctx.drawImage(
+                sprites,
+                CanS.spriteX, CanS.spriteY,
+                CanS.largura, CanS.altura, 
+                CanS.x ,CanS.y,
+                CanS.largura, CanS.altura,
+
+            );
+            },
+        atualiza(){
+            CanS.x = CanS.x - 1;
+            
+        }
+        
+    }
+
+    
+    
+
+
 
 //Telas:
 
@@ -185,8 +240,11 @@ const telas = {
 telas.Jogo = {
 desenha(){
     back.desenha();
+    CanN.desenha();
+    CanS.desenha();
     bg.desenha();
     Izidio.desenha();
+
     
 },
 click(){
@@ -194,6 +252,8 @@ click(){
 Izidio.velocidade = -Izidio.pulo;
 },
 atualiza(){
+    CanN.atualiza();
+    CanS.atualiza();
     Izidio.atualiza();
 }
 }
@@ -214,13 +274,16 @@ telas.Over = {
 
 }
 
+var pipe = []
+
+pipe[0]
+
 
 
 function loop(){
 
 telaAtived.desenha();
 telaAtived.atualiza();
-
 
 
 requestAnimationFrame(loop);
