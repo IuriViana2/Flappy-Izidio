@@ -178,7 +178,7 @@ var CanN = {
     spriteY: 268,
     largura: 43,
     altura: 215,
-    gap: 87, 
+    gap: 75, 
     }
 
     var CanS = {
@@ -221,8 +221,7 @@ var CanN = {
              )  
 
          }
-             
-         }
+            
          if(pipe[pos].x == 5){
             score++
             som.play();
@@ -231,7 +230,7 @@ var CanN = {
 
     }
 
-
+    }
 
 
 
