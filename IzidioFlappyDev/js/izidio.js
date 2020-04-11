@@ -2,6 +2,8 @@ const sprites = new Image();
 sprites.src = "img/sprites.png";
 const canvas = document.getElementById('games');
 const ctx = canvas.getContext('2d');
+const som = new Audio();
+som.src = "Som.mp3";
 
 //rever parte de colisão depois;
 
@@ -76,7 +78,15 @@ desenha(){
             (bg.x + bg.largura) ,bg.y,
             bg.largura, bg.altura, 
          );
+
+},
+atualiza(){
+    bg.x = bg.x - 1;
+        if(bg.x ==-130){
+            bg.x = bg.spriteX;
+        }
 }
+
 }
 
 //Fundo
@@ -215,6 +225,92 @@ var CanN = {
     
         }  
     }
+    //medalhas
+
+    const Ouro= {
+        spriteX: 0,
+        spriteY: 125,
+        largura: 44,
+        altura: 44,
+        x: 72,
+        y: 70+90,
+
+        desenha(){
+            ctx.drawImage(
+                sprites,
+                Ouro.spriteX,Ouro.spriteY,
+                Ouro.largura,Ouro.altura,
+                Ouro.x,Ouro.y,
+                Ouro.largura,Ouro.altura,
+
+            )
+        }
+    }
+
+    const Bronze= {
+        spriteX: 48,
+        spriteY: 124,
+        largura: 44,
+        altura: 44,
+        x: 72,
+        y: 70+90,
+
+        desenha(){
+            ctx.drawImage(
+                sprites,
+                Bronze.spriteX,Bronze.spriteY,
+                Bronze.largura,Bronze.altura,
+                Bronze.x,Bronze.y,
+                Bronze.largura,Bronze.altura,
+
+            )
+        }
+    }
+
+    const Prata= {
+        spriteX: 48,
+        spriteY: 78,
+        largura: 44,
+        altura: 44,
+        x: 72,
+        y: 70+90,
+
+        desenha(){
+            ctx.drawImage(
+                sprites,
+                Prata.spriteX,Prata.spriteY,
+                Prata.largura,Prata.altura,
+                Prata.x,Prata.y,
+                Prata.largura,Prata.altura,
+
+            )
+        }
+    }
+
+
+    var score = 0;
+
+    var scor = {
+        desenha(){
+
+            ctx.fillStyle = "white";
+            ctx.strokeStyle = "black";
+            ctx.font = "70px Calibri";
+            ctx.fillText(score,(canvas.width/2-10),90);
+            ctx.strokeText(score,(canvas.width/2-10),90);
+
+            if(CanN.x == 5 && CanS.x == 5){
+                score++
+                som.play();
+
+            
+            }
+
+        }
+
+
+    }
+ 
 
     
     
@@ -254,18 +350,23 @@ desenha(){
     CanS.desenha();
     bg.desenha();
     Izidio.desenha();
+    scor.desenha();
+    
+    
 
     
 },
 click(){
+    Izidio.velocidade = -Izidio.pulo;
 
-Izidio.velocidade = -Izidio.pulo;
+
 },
 atualiza(){
 
     CanN.atualiza();
     CanS.atualiza();
     Izidio.atualiza();
+    bg.atualiza();
 }
 }
 
@@ -275,11 +376,24 @@ telas.Over = {
         back.desenha();
         bg.desenha();
         pont.desenha();
+        if(score <= 15 ){
+            Bronze.desenha()
+
+        }
+        else if(score <= 30){
+            Prata.desenha();
+        }
+        else if(score == 40 ){
+            Ouro.desenha()
+
+        }
     },
     click(){
         mudaDeTela(telas.INICIO);
+        score = 0;
     },
     atualiza(){
+        
 
     }
 
