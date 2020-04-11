@@ -172,6 +172,27 @@ desenha(){
 }
 }
 
+const pont2 = {
+    spriteX: 318,
+    spriteY: 293,
+    largura: 237,
+    altura: 172,
+    x: 40,
+    y: 70+45,
+    
+     
+    desenha(){
+        ctx.drawImage(
+        sprites,
+        pont2.spriteX, pont2.spriteY,
+        pont2.largura, pont2.altura, 
+        pont2.x ,pont2.y,
+        pont2.largura, pont2.altura,
+        );
+    
+    }
+    }
+
 
 var CanN = {
     spriteX: 14,
@@ -217,9 +238,18 @@ var CanN = {
          if(pipe[pos].x==150){
              pipe.push(
                  {x: canvas.width,
-                 y: Math.floor(Math.random()* -70)}
+                 y: Math.floor(Math.random()* -150)}
              )  
 
+         }
+         if(score == 100 && pipe[pos].x==65){
+                pipe.push(
+                    {x: canvas.width,
+                    y: Math.floor(Math.random()* -110)}
+                )  
+         }
+         if(score == 200){
+             mudaDeTela(telas.FIM);
          }
             
          if(pipe[pos].x == 5){
@@ -231,9 +261,6 @@ var CanN = {
     }
 
     }
-
-
-
 
     //medalhas
 
@@ -317,6 +344,29 @@ var CanN = {
     }
  
 
+    //balões
+
+    var balon = {
+        spriteX: 77,
+        spriteY: 9,
+        largura: 50,
+        altura: 44,
+        x: (canvas.width/2) - 24,
+        y: (canvas.height/2) - 60,
+
+        desenha(){
+            ctx.drawImage(
+                sprites,
+                balon.spriteX,balon.spriteY,
+                balon.largura,balon.altura,
+                balon.x,balon.y,
+                balon.largura,balon.altura,
+
+            )
+        }
+
+    }
+
     
     
 
@@ -357,8 +407,6 @@ desenha(){
     scor.desenha();
     
     
-
-    
 },
 click(){
     Izidio.velocidade = -Izidio.pulo;
@@ -366,10 +414,11 @@ click(){
 
 },
 atualiza(){
-
-   
     Izidio.atualiza();
     bg.atualiza();
+    if(Izidio.y<-70){
+        mudaDeTela(telas.Over)
+    }
 }
 }
 
@@ -379,14 +428,14 @@ telas.Over = {
         back.desenha();
         bg.desenha();
         pont.desenha();
-        if(score <= 15 ){
+        if(score <= 150 ){
             Bronze.desenha()
 
         }
-        else if(score <= 30){
+        else if(score <= 299){
             Prata.desenha();
         }
-        else if(score == 40 ){
+        else if(score == 150 ){
             Ouro.desenha()
 
         }
@@ -394,12 +443,105 @@ telas.Over = {
     click(){
         mudaDeTela(telas.INICIO);
         score = 0;
+        Izidio.y = 50;
+        Izidio.x = 10;
+        Izidio.velocidade=0;
+        pipe = [];
+        pipe[0] = {
+            x: canvas.width,
+            y: 0,
+        }
     },
     atualiza(){
         
 
     }
 
+}
+
+telas.FIM = {
+    desenha(){
+        back.desenha();
+        bg.desenha();
+        scor.desenha();
+        balon.desenha();
+        Izidio.desenha();
+    },
+    atualiza(){
+        if(score ==200&& Izidio.x<(canvas.width/2)-Izidio.largura/2){
+            Izidio.x++
+        }
+        while(score ==200&& Izidio.y<=(canvas.height/2)-Izidio.altura/2){
+            Izidio.y++
+        }
+        while(score ==200&& Izidio.y>=(canvas.height/2)-Izidio.altura/2){
+            Izidio.y--
+        }
+        if(score ==200&&Izidio.x==(canvas.width/2)-Izidio.largura/2){
+            mudaDeTela(telas.final)
+         }
+       
+    }
+
+}
+
+telas.TelaFim = {
+
+    desenha(){
+    back.desenha();
+    bg.desenha();
+    pont2.desenha();
+    if(score <= 150 ){
+        Bronze.desenha()
+
+    }
+    else if(score <= 299){
+        Prata.desenha();
+    }
+    else if(score == 200 ){
+        Ouro.desenha()
+
+    }
+    balon.x=(canvas.width/2) - 24,
+    balon.y= (canvas.height/2) - 60,
+    Izidio.y = 50;
+    Izidio.x = 10;
+    Izidio.velocidade=0;
+    pipe = [];
+        pipe[0] = {
+            x: canvas.width,
+            y: 0,
+        }
+},
+click(){
+    mudaDeTela(telas.INICIO);
+    score = 0;
+},
+atualiza(){
+
+}
+}
+
+telas.final= {
+
+    desenha(){
+        back.desenha();
+        bg.desenha();
+        scor.desenha();
+        balon.desenha();
+        Izidio.desenha();
+
+    },
+
+    atualiza(){
+        if(score ==200&&Izidio.y<480){
+            Izidio.y--
+            balon.y--
+         }
+         if(score ==200&&Izidio.y<-100){
+             mudaDeTela(telas.TelaFim)
+         }
+    }
 }
 
 
@@ -431,4 +573,5 @@ window.document.addEventListener('keypress', function(e){
 
 mudaDeTela(telas.INICIO);
 loop();
+
 
