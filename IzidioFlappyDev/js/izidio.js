@@ -35,8 +35,11 @@ atualiza(){
     if(colisão(Izidio, bg)){
         Izidio.y = 50;
         Izidio.velocidade=0;
-        CanN.x = canvas.width;
-        CanS.x = canvas.width;
+        pipe = [];
+        pipe[0] = {
+            x: canvas.width,
+            y: 0,
+        }
         mudaDeTela(telas.Over);
     }
         Izidio.velocidade = Izidio.velocidade+Izidio.gravidade;
@@ -174,28 +177,8 @@ var CanN = {
     spriteX: 14,
     spriteY: 268,
     largura: 43,
-    altura: 230,
-    x: canvas.width,
-    gap: 60,
-    y: Math.floor(Math.random() * -70),
-    desenha(){
-        ctx.drawImage(
-        sprites,
-        CanN.spriteX, CanN.spriteY,
-        CanN.largura, CanN.altura, 
-        CanN.x ,CanN.y,
-        CanN.largura, CanN.altura,
-        );
-    },
-    atualiza(){
-        CanN.x = CanN.x - 1;
-        if(CanN.x == -20){
-            CanN.x = canvas.width;
-        }
-
-    
-
-    }
+    altura: 215,
+    gap: 87, 
     }
 
     var CanS = {
@@ -203,28 +186,56 @@ var CanN = {
         spriteY: 224,
         largura: 41,
         altura: 217,
+    }
+
+    var pipe = [];
+
+    pipe[0] = {
         x: canvas.width,
-        y: CanN.altura + CanN.gap + CanN.y,
-       
-        desenha(){
+        y: 0,
+    }
+
+    function draw(){
+    for(var pos = 0; pos < pipe.length;pos++){     
+            ctx.drawImage(
+                sprites,
+                CanN.spriteX, CanN.spriteY,
+                CanN.largura, CanN.altura, 
+                pipe[pos].x ,pipe[pos].y,
+                CanN.largura, CanN.altura,
+            );
             ctx.drawImage(
                 sprites,
                 CanS.spriteX, CanS.spriteY,
                 CanS.largura, CanS.altura, 
-                CanS.x ,CanS.y,
+                pipe[pos].x ,pipe[pos].y + CanN.altura +CanN.gap,
                 CanS.largura, CanS.altura,
 
             );
-    
-            },
-        atualiza(){
-            CanS.x = CanS.x - 1;
-            if(CanS.x == -20){
-                CanS.x = canvas.width;
-            }
-    
-        }  
+
+            pipe[pos].x--
+         if(pipe[pos].x==150){
+             pipe.push(
+                 {x: canvas.width,
+                 y: Math.floor(Math.random()* -70)}
+             )  
+
+         }
+             
+         }
+         if(pipe[pos].x == 5){
+            score++
+            som.play();
+
+        }
+
     }
+
+
+
+
+
+
     //medalhas
 
     const Ouro= {
@@ -287,6 +298,7 @@ var CanN = {
         }
     }
 
+//score
 
     var score = 0;
 
@@ -299,12 +311,6 @@ var CanN = {
             ctx.fillText(score,(canvas.width/2-10),90);
             ctx.strokeText(score,(canvas.width/2-10),90);
 
-            if(CanN.x == 5 && CanS.x == 5){
-                score++
-                som.play();
-
-            
-            }
 
         }
 
@@ -346,8 +352,7 @@ telas.Jogo = {
 desenha(){
 
     back.desenha();
-    CanN.desenha();
-    CanS.desenha();
+    draw();
     bg.desenha();
     Izidio.desenha();
     scor.desenha();
@@ -363,8 +368,7 @@ click(){
 },
 atualiza(){
 
-    CanN.atualiza();
-    CanS.atualiza();
+   
     Izidio.atualiza();
     bg.atualiza();
 }
