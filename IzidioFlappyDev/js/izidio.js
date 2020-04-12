@@ -199,7 +199,7 @@ var CanN = {
     spriteY: 268,
     largura: 43,
     altura: 215,
-    gap: 75, 
+    gap: 87, 
     }
 
     var CanS = {
@@ -235,19 +235,29 @@ var CanN = {
             );
 
             pipe[pos].x--
-         if(pipe[pos].x==150){
+         if(pipe[pos].x==170){
              pipe.push(
                  {x: canvas.width,
-                 y: Math.floor(Math.random()* -150)}
+                 y: Math.floor(Math.random()* -130)}
              )  
 
          }
-         if(score == 100 && pipe[pos].x==65){
-                pipe.push(
-                    {x: canvas.width,
-                    y: Math.floor(Math.random()* -110)}
-                )  
+         if(pipe[pos].x>Izidio.x&&Izidio.x+Izidio.largura >= pipe[pos].x && Izidio.y + Izidio.altura <= pipe[pos].y + CanN.altura +15 
+            || pipe[pos].x>Izidio.x&&Izidio.x+Izidio.largura >= pipe[pos].x && Izidio.y + Izidio.altura >= pipe[pos].y + CanS.altura + CanN.gap){
+          mudaDeTela(telas.Over);
+        
          }
+         if(score==100){
+             CanN.gap = 77;
+         }
+         if(score==180){
+            CanN.gap = 70;
+        }
+        if(score==199){
+            CanN.gap = 63;
+        }
+
+
          if(score == 200){
              mudaDeTela(telas.FIM);
          }
@@ -334,9 +344,18 @@ var CanN = {
             ctx.fillStyle = "white";
             ctx.strokeStyle = "black";
             ctx.font = "70px Calibri";
+            if(score<=9){ 
             ctx.fillText(score,(canvas.width/2-10),90);
             ctx.strokeText(score,(canvas.width/2-10),90);
-
+            }
+            else if(score>9){
+            ctx.fillText(score,(canvas.width/2-35),90);
+            ctx.strokeText(score,(canvas.width/2-35),90);
+            }
+            else if(score>99){
+            ctx.fillText(score,(canvas.width/2-70),90);
+            ctx.strokeText(score,(canvas.width/2-70),90);
+            }
 
         }
 
@@ -428,14 +447,14 @@ telas.Over = {
         back.desenha();
         bg.desenha();
         pont.desenha();
-        if(score <= 150 ){
+        if(score <=150 ){
             Bronze.desenha()
 
         }
-        else if(score <= 299){
+        else if(score <= 199){
             Prata.desenha();
         }
-        else if(score == 150 ){
+        else if(score == 200 ){
             Ouro.desenha()
 
         }
@@ -451,6 +470,7 @@ telas.Over = {
             x: canvas.width,
             y: 0,
         }
+        CanN.gap = 87;
     },
     atualiza(){
         
@@ -495,7 +515,7 @@ telas.TelaFim = {
         Bronze.desenha()
 
     }
-    else if(score <= 299){
+    else if(score <= 199){
         Prata.desenha();
     }
     else if(score == 200 ){
