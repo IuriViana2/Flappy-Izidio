@@ -242,8 +242,8 @@ var CanN = {
              )  
 
          }
-         if(pipe[pos].x>Izidio.x&&Izidio.x -15+Izidio.largura >= pipe[pos].x && Izidio.y + Izidio.altura <= pipe[pos].y + CanN.altura +15 
-            || pipe[pos].x>Izidio.x&&Izidio.x -15+Izidio.largura>= pipe[pos].x && Izidio.y + Izidio.altura >= pipe[pos].y + CanS.altura + CanN.gap+15 ){
+         if(pipe[pos].x>Izidio.x&&Izidio.x -20+Izidio.largura >= pipe[pos].x && Izidio.y + Izidio.altura <= pipe[pos].y + CanN.altura +15 
+            || pipe[pos].x>Izidio.x&&Izidio.x -20+Izidio.largura>= pipe[pos].x && Izidio.y + Izidio.altura >= pipe[pos].y + CanS.altura + CanN.gap+15 ){
           mudaDeTela(telas.Over);
         
          }
