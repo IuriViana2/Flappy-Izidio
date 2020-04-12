@@ -243,22 +243,22 @@ var CanN = {
 
          }
          if(pipe[pos].x>Izidio.x&&Izidio.x+Izidio.largura >= pipe[pos].x && Izidio.y + Izidio.altura <= pipe[pos].y + CanN.altura +15 
-            || pipe[pos].x>Izidio.x&&Izidio.x+Izidio.largura >= pipe[pos].x && Izidio.y + Izidio.altura >= pipe[pos].y + CanS.altura + CanN.gap){
+            || pipe[pos].x>Izidio.x&&Izidio.x+Izidio.largura >= pipe[pos].x && Izidio.y + Izidio.altura >= pipe[pos].y + CanS.altura + CanN.gap+15 ){
           mudaDeTela(telas.Over);
         
          }
          if(score==100){
              CanN.gap = 77;
          }
-         if(score==180){
+         if(score==129){
             CanN.gap = 70;
         }
-        if(score==199){
+        if(score==149){
             CanN.gap = 63;
         }
 
 
-         if(score == 200){
+         if(score == 150){
              mudaDeTela(telas.FIM);
          }
             
@@ -447,14 +447,14 @@ telas.Over = {
         back.desenha();
         bg.desenha();
         pont.desenha();
-        if(score <=150 ){
+        if(score <=90 ){
             Bronze.desenha()
 
         }
-        else if(score <= 199){
+        else if(score <= 149){
             Prata.desenha();
         }
-        else if(score == 200 ){
+        else if(score == 150 ){
             Ouro.desenha()
 
         }
@@ -488,16 +488,16 @@ telas.FIM = {
         Izidio.desenha();
     },
     atualiza(){
-        if(score ==200&& Izidio.x<(canvas.width/2)-Izidio.largura/2){
+        if(score ==150&& Izidio.x<(canvas.width/2)-Izidio.largura/2){
             Izidio.x++
         }
-        while(score ==200&& Izidio.y<=(canvas.height/2)-Izidio.altura/2){
+        while(score ==150&& Izidio.y<=(canvas.height/2)-Izidio.altura/2){
             Izidio.y++
         }
-        while(score ==200&& Izidio.y>=(canvas.height/2)-Izidio.altura/2){
+        while(score ==150&& Izidio.y>=(canvas.height/2)-Izidio.altura/2){
             Izidio.y--
         }
-        if(score ==200&&Izidio.x==(canvas.width/2)-Izidio.largura/2){
+        if(score ==150&&Izidio.x==(canvas.width/2)-Izidio.largura/2){
             mudaDeTela(telas.final)
          }
        
@@ -511,14 +511,14 @@ telas.TelaFim = {
     back.desenha();
     bg.desenha();
     pont2.desenha();
-    if(score <= 150 ){
+    if(score <= 90 ){
         Bronze.desenha()
 
     }
-    else if(score <= 199){
+    else if(score <= 149){
         Prata.desenha();
     }
-    else if(score == 200 ){
+    else if(score == 150 ){
         Ouro.desenha()
 
     }
@@ -554,11 +554,11 @@ telas.final= {
     },
 
     atualiza(){
-        if(score ==200&&Izidio.y<480){
+        if(score ==150&&Izidio.y<480){
             Izidio.y--
             balon.y--
          }
-         if(score ==200&&Izidio.y<-100){
+         if(score ==150&&Izidio.y<-100){
              mudaDeTela(telas.TelaFim)
          }
     }
