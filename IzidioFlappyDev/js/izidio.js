@@ -122,8 +122,13 @@ desenha(){
     );
 
     
+},
+atualiza(){
+    back.x = back.x - 2;
+    if(back.x ==-220){
+        back.x = 0;
+    }
 }
-
 }
 
 //Inicio 
@@ -233,7 +238,7 @@ var CanN = {
                 CanS.largura, CanS.altura,
 
             );
-            
+
             pipe[pos].x = pipe[pos].x - 2; 
         
          if(pipe[pos].x==170){
@@ -438,6 +443,7 @@ atualiza(){
     if(Izidio.y<-70){
         mudaDeTela(telas.Over)
     }
+    back.atualiza();
 }
 }
 
