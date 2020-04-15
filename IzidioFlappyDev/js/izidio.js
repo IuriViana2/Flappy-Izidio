@@ -123,12 +123,6 @@ desenha(){
 
     
 },
-atualiza(){
-    back.x = back.x - 2;
-    if(back.x ==-220){
-        back.x = 0;
-    }
-}
 }
 
 //Inicio 
@@ -443,7 +437,6 @@ atualiza(){
     if(Izidio.y<-70){
         mudaDeTela(telas.Over)
     }
-    back.atualiza();
 }
 }
 
