@@ -233,15 +233,15 @@ var CanN = {
                 CanS.largura, CanS.altura,
 
             );
-
-            pipe[pos].x--
+            
+            pipe[pos].x = pipe[pos].x - 2; 
+        
          if(pipe[pos].x==170){
              pipe.push(
                  {x: canvas.width,
                  y: Math.floor(Math.random()* -130)}
              )  
-
-         }
+                 }
          if(pipe[pos].x>Izidio.x&&Izidio.x -20+Izidio.largura >= pipe[pos].x && Izidio.y + Izidio.altura <= pipe[pos].y + CanN.altura +15 
             || pipe[pos].x>Izidio.x&&Izidio.x -20+Izidio.largura>= pipe[pos].x && Izidio.y + Izidio.altura >= pipe[pos].y + CanS.altura + CanN.gap+15 ){
           mudaDeTela(telas.Over);
@@ -262,7 +262,7 @@ var CanN = {
              mudaDeTela(telas.FIM);
          }
             
-         if(pipe[pos].x == 5){
+         if(pipe[pos].x == 6){
             score++
             som.play();
 
